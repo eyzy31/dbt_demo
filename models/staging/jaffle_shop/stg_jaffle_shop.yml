@@ -4,6 +4,7 @@ models:
   - name: stg_customers
     columns: 
       - name: customer_id
+        description: one unique customer per row
         tests:
           - unique
           - not_null
@@ -11,10 +12,12 @@ models:
   - name: stg_orders
     columns:
       - name: order_id
+        description: one order per customer
         tests:
           - unique
           - not_null
       - name: status
+        description: '{{  doc("order_status")  }} '
         tests:
           - accepted_values:
               values:
