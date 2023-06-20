@@ -7,3 +7,9 @@ sources:
     tables:
       - name: customers
       - name: orders
+
+  - name: stripe
+    database: dbt-tutorial
+    schema: stripe
+    tables:
+      - name: payment
