@@ -5,7 +5,9 @@ select
     status,
 
     -- amount is stored in cents, convert it to dollars
-    amount / 100 as amount,
+    --in this example we are passing a string called amount
+    --if we want we can also pass amount as a variable but needs to be defined
+    {{ cents_to_dollars('amount',2) }} as amount,
     created as created_at
 
 from {{ source('stripe', 'payment') }}
