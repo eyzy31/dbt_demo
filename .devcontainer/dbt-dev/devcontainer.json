@@ -1,0 +1,63 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+    "name": "dbt-dev-container",
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+    "image": "mcr.microsoft.com/devcontainers/base:jammy",
+    "features": {
+      "ghcr.io/devcontainers/features/python:1": {},
+      "ghcr.io/dhoeric/features/google-cloud-cli:1": {},
+      "ghcr.io/devcontainers-contrib/features/pre-commit:2":{},
+      "ghcr.io/devcontainers/features/git:1": {},
+      "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "remoteEnv": {
+      "DBT_PROFILES_DIR": "/home/vscode/.dbt"
+    },
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "pip install -r dbt-dev-requirements.txt",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "innoverio.vscode-dbt-power-user",
+          "samuelcolvin.jinjahtml",
+          "bastienboutonnet.vscode-dbt",
+          "eamodio.gitlens",
+          "mhutchie.git-graph",
+          "janisdd.vscode-edit-csv"
+        ],
+        "settings": {
+          "files.associations": {
+            "*.sql": "jinja-sql",
+            "*.yml": "jinja-yaml"
+          },
+          "python.interpreter.infoVisibility": "always",
+          "python.defaultInterpreterPath": "/usr/local/python/current/bin/python",
+          "python.showInterpreterStatusBar": true,
+          "[yaml]": {
+            "editor.defaultFormatter": "redhat.vscode-yaml",
+            "editor.formatOnSave": true
+          },
+          "yaml.schemas": {
+            "https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/dbt_yml_files.json": [
+              "/**/*.yml",
+              "!profiles.yml",
+              "!dbt_project.yml",
+              "!packages.yml",
+              "!selectors.yml",
+              "!profile_template.yml"
+            ],
+            "https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/dbt_project.json": [
+              "dbt_project.yml"
+            ],
+            "https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/selectors.json": [
+              "selectors.yml"
+            ],
+            "https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/packages.json": [
+              "packages.yml"
+            ]
+          }
+        }
+      }
+    }
+  }
